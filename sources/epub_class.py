@@ -15,7 +15,7 @@ class EPUB:
 
         self.metadata = {
             "title": self.content_opf["package"]["metadata"]["dc:title"],
-            "creator": ""
+            "creator": self.content_opf
         }
 
         self.toc = xmltodict.parse(self.raw_file.read('OEBPS/toc.ncx'))
@@ -24,8 +24,5 @@ class EPUB:
 
         print(self.metadata)
 
-    def get_mimetype(self, chapter):
-        return self.raw_file.read(f'OEBPS/Text/chapter{chapter}.xhtml').decode("UTF-8")
 
 
-S = EPUB("D:\github\itogovi11\prest.epub")
