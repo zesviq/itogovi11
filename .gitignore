@@ -3,3 +3,4 @@ dist
 .venv
 settings.json
 main.spec
+/books/

@@ -1,14 +1,16 @@
 import sys
 from PySide6 import QtCore, QtWidgets, QtGui, QtUiTools
 
-from sources.interface.main_interface import MainWindow
-from sources.interface.about import AboutWindow
+# from sources.interface.main_interface import MainWindow
+# from sources.interface.about import AboutWindow
 
 import si
 
 
 if __name__ == '__main__':
-    import file_browser
+    import sources.file_extension.epub_class
+
+    # import file_browser
 
     # app = QtWidgets.QApplication(sys.argv)
 
