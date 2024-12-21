@@ -16,7 +16,7 @@ class Settings:
 
     def save(self):
         with open(self.settings_file, "w+", encoding="UTF-8") as f:
-            f.write(json.dumps(self.settings, indent=5))
+            f.write(json.dumps(self.settings, indent=5, ensure_ascii=False))
 
     def set_value(self, key: str, value):
         self.settings[key] = value
