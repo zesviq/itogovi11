@@ -15,6 +15,13 @@ def get_file_extension(filename):
 class FileBrowser:
     def __init__(self):
         self.file_list = {}
+
+        # create temp folder
+
+        t = "temp"
+        if not (os.path.exists(t) and not os.path.isfile(t)):
+            os.makedirs("./temp")
+
         pass
 
     def scan_folder(self, directory: str):
@@ -38,9 +45,4 @@ class FileBrowser:
             raise KeyError("FileBroken")
 
 
-a = FileBrowser()
-# a.scan_folder("books")
-# a.scan_folder("../itogovi11/books")
-# print(json.dumps(a.get_file_list(), indent=2))
-
-a.init_file("./books/010000_000060_ART-fe85f208-ab88-41cc-bb63-ec52e7811146-Преступление_отпавшего_листа.epub")
+_FileBrowser = FileBrowser()

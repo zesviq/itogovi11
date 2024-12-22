@@ -32,6 +32,12 @@ class Contributor:
             self.role = "oth"
 
 
+class ContentsElement:
+    def __init__(self, ident: str, label: str, path: str):
+        self.path = path
+        self.label = label
+        self.ident = ident
+
 def contributors_roles(cont_list: list):
     ret = []
     for cont in cont_list:
@@ -77,22 +83,31 @@ class epub:
             for i in delta_list(metadata["dc:identifier"]):
                 scheme = i["@opf:scheme"]
                 if scheme == "UUID" and i["@id"] == "BookId":
-                    self.metadata["BookId"] = i["#text"]
+                    self.metadata["BookId"] = i["#text"].split(":")[-1]
                 elif scheme == "ISBN":
                     self.metadata["ISBN"] = i["#text"]
-
-            # Set
-            print("\n\n", self.metadata)
-            self.toc = xmltodict.parse(self.raw_file.read('OEBPS/toc.ncx'))
-
-        # print(self.toc)
-
-        # print(self.metadata)
         except KeyError:
             raise KeyError("ItsNoEPUB")
 
+    # Призакрузке
+
+    def init_temp_folder(self):
+        pass
+
+    def table_of_context(self):
+        toc = xmltodict.parse(self.raw_file.read("OEBPS/toc.ncx").decode("UTF-8"))
+        return [ContentsElement(i["@id"], i["navLabel"]["text"], "OEBPS/" + i["content"]["@src"])
+                for i in toc["ncx"]["navMap"]["navPoint"]]
+
+    def load_chapter(self, filename):
+        return self.raw_file.read(filename).decode("UTF-8")
+
+    def init_temp_cover(self):
+        self.raw_file.extract(self.metadata["cover_path"], f"./temp/{self.metadata['ISBN']}")
+        return f"./temp/{self.metadata['ISBN']}/{self.metadata["cover_path"]}"
+
+    def get_temp_image(self, path: str):
+        pass
+
     def get_metadata(self):
         return self.metadata
-
-
-# a = epub("./books/010000_000060_ART-fe85f208-ab88-41cc-bb63-ec52e7811146-Преступление_отпавшего_листа.epub")

@@ -21,6 +21,9 @@ label_padding = "Отступ от края экрана"
 label_paragraph_margin = "Интервал между абзацами"
 label_leading = "Межстрочный интервал"
 
+win_book_info = "О книге"
+win_main = "Simple Epub reader"
+
 epub_contributor_roles = {
     "adp": "Адаптация",
     "ann": "Аннотации",
