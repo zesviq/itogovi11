@@ -1,7 +1,7 @@
 from PySide6 import QtCore, QtWidgets, QtGui, QtUiTools
 import sources.file_extension.epub_class
 from si import lang
-
+from sources.lang.lang_codes import _lang_codes
 
 def gen_html_p_property(item, value, typeq: str = "Normal"):
     if typeq == "Normal":
@@ -27,7 +27,6 @@ class BookInfo:
         self.ui = loader.load(ui_file, None)
         ui_file.close()
 
-
         with open("./sources/interface/html/book_info.html", encoding="UTF-8") as f:
             q = f.read()
             ret = []
@@ -35,7 +34,9 @@ class BookInfo:
             q = q.replace("$authors", str(gen_html_p_property(", ", book.metadata["authors"], "Authors")))
             q = q.replace("$description", book.metadata["description"])
 
-            ret.append(gen_html_p_property(lang.epub_metadata["language"], book.metadata["language"]))
+            ret.append(gen_html_p_property(lang.epub_metadata["path"], book.filename))
+            ret.append(gen_html_p_property(lang.epub_metadata["language"],
+                                           f"{_lang_codes[book.metadata['language']]["nativeName"]} ({book.metadata['language']})"))
             ret.append(gen_html_p_property(lang.epub_metadata["publisher"], book.metadata["publisher"]))
             ret.append(gen_html_p_property(lang.epub_metadata["rights"], book.metadata["rights"]))
             ret.append(gen_html_p_property(lang.epub_metadata["ISBN"], book.metadata["ISBN"]))
@@ -46,6 +47,9 @@ class BookInfo:
 
             self.ui.cover.setHtml(f"<img src='{book.init_temp_cover()}' width='350'")
             self.ui.textBrowser.setHtml(q)
+
+        with open("sources/interface/styles/all_palette.qss") as st:
+            self.ui.setStyleSheet(st.read())
 
         QtGui.QShortcut('Esc', self.ui).activated.connect(self.ui.close)
 

@@ -8,7 +8,11 @@ import sources.lang.ru as lang
 
 class _Singleton:
     def __init__(self):
+        self.opened = []
         pass
+
+    def open(self, window):
+        return self.opened.append(window)
 
 
 Singleton = _Singleton()

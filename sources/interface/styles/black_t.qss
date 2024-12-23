@@ -1,0 +1,37 @@
+* {
+    color: white;
+    selection-background-color: rgba(18, 180, 255, 50);
+}
+
+
+#MainWindow, #content {
+    background: black;
+    color: #dfdfdf;
+}
+
+QPushButton {
+    background: #141414;
+    border: 1px solid rgb(133, 133, 133);
+    border-radius: 10px;
+}
+
+QPushButton::hover {
+    background: #272727;
+}
+
+#toc_tabs QTabBar::tab:selected {
+    background: #131313;
+}
+
+#toc_tabs QTabBar::tab {
+    background: #0c0c0c;
+}
+
+#dockWidget, #table_of_contents, #toc_tabs, #citat_k {
+    background: #131313;
+}
+
+
+#content {
+    text-align: right;
+}

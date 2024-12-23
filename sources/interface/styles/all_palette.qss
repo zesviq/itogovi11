@@ -1,0 +1,3 @@
+#AboutBook {
+    background: palette(base);
+}

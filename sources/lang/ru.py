@@ -71,3 +71,10 @@ epub_metadata = {
         "mod": ""
     }
 }
+
+theme_list = {
+    "sepia": "Сепия",
+    "dark": "Тёмная",
+    "black": "Чёрная",
+    "white": "Белая",
+}
